@@ -13,6 +13,10 @@ namespace Assignment1
     {
         public static void Main(string[] args)
         {
+            //Commands for testing
+            //args = new string[]{ "-i", "data.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
+            //args = new string[]{ "-i", "data.csv", "-o", "output.csv" };//for testing
+
             // Variables and flags
 
             // The path to the input file to load.
@@ -43,15 +47,9 @@ namespace Assignment1
                 {
                     Console.WriteLine("-i <path> or --input <path> : loads the input file path specified (required)");
                     Console.WriteLine("-o <path> or --output <path> : saves result in the output file path specified (optional)");
-
-                    // TODO: include help info for count
-                    //"-c or --count : displays the number of entries in the input file (optional).";
-
-                    // TODO: include help info for append
-                    //"-a or --append : enables append mode when writing to an existing output file (optional)";
-
-                    // TODO: include help info for sort
-                    //"-s or --sort <column name> : outputs the results sorted by column name";
+                    Console.WriteLine("-c or --count : displays the number of entries in the input file (optional)");
+                    Console.WriteLine("-a or --append : enables append mode when writing to an existing output file (optional)");
+                    Console.WriteLine("-s or --sort <column name> : outputs the results sorted by column name");
 
                     break;
                 }
@@ -66,11 +64,11 @@ namespace Assignment1
 
                         if (string.IsNullOrEmpty(inputFile))
                         {
-                            // TODO: print no input file specified.
+                            Console.WriteLine("Error. No input file specified.");
                         }
                         else if (!File.Exists(inputFile))
                         {
-                            // TODO: print the file specified does not exist.
+                            Console.WriteLine("Error. File does not exist.");
                         }
                         else
                         {
@@ -81,8 +79,12 @@ namespace Assignment1
                 }
                 else if (args[i] == "-s" || args[i] == "--sort")
                 {
-                    // TODO: set the sortEnabled flag and see if the next argument is set for the column name
-                    // TODO: set the sortColumnName string used for determining if there's another sort function.
+                    sortEnabled = true;
+                    ++i;
+                    if(args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack")
+                    {
+                        sortColumnName = args[i];
+                    }
                 }
                 else if (args[i] == "-c" || args[i] == "--count")
                 {
@@ -90,7 +92,7 @@ namespace Assignment1
                 }
                 else if (args[i] == "-a" || args[i] == "--append")
                 {
-                    // TODO: set the appendToFile flag
+                    appendToFile = true;
                 }
                 else if (args[i] == "-o" || args[i] == "--output")
                 {
@@ -102,10 +104,11 @@ namespace Assignment1
                         string filePath = args[i];
                         if (string.IsNullOrEmpty(filePath))
                         {
-                            // TODO: print No output file specified.
+                            Console.WriteLine("Error. File not specified.");
                         }
                         else
                         {
+                            outputFile = filePath;
                             // TODO: set the output file to the outputFile
                         }
                     }
@@ -119,11 +122,32 @@ namespace Assignment1
             if (sortEnabled)
             {
                 // TODO: add implementation to determine the column name to trigger a different sort. (Hint: column names are the 4 properties of the weapon class)
-
+                switch(sortColumnName)
+                {
+                    case "Name":
+                        results.Sort(Weapon.CompareByName);
+                        Console.WriteLine("Sorting by Name.");
+                        break;
+                    case "Type":
+                        results.Sort(Weapon.CompareByType);
+                        Console.WriteLine("Sorting by Type.");
+                        break;
+                    case "Rarity":
+                        results.Sort(Weapon.CompareByRarity);
+                        Console.WriteLine("Sorting by Rarity.");
+                        break;
+                    case "BaseAttack":
+                        results.Sort(Weapon.CompareByBaseAttack);
+                        Console.WriteLine("Sorting by BaseAttack.");
+                        break;
+                    default:
+                        results.Sort(Weapon.CompareByName);
+                        Console.WriteLine("Sorting by Name.");
+                        break;
+                }
                 // print: Sorting by <column name> e.g. BaseAttack
 
                 // Sorts the list based off of the Weapon name.
-                results.Sort(Weapon.CompareByName);
             }
 
             if (displayCount)
@@ -136,26 +160,33 @@ namespace Assignment1
                 if (!string.IsNullOrEmpty(outputFile))
                 {
                     FileStream fs;
-
+                    
                     // Check if the append flag is set, and if so, then open the file in append mode; otherwise, create the file to write.
                     if (appendToFile && File.Exists((outputFile)))
                     {
+                        Console.WriteLine("Output append to existing file.");
                         fs = File.Open(outputFile, FileMode.Append);
                     }
                     else
                     {
+                        Console.WriteLine("Output to created new file.");
                         fs = File.Open(outputFile, FileMode.Create);
                     }
 
                     // opens a stream writer with the file handle to write to the output file.
                     using (StreamWriter writer = new StreamWriter(fs))
                     {
+
                         // Hint: use writer.WriteLine
                         // TODO: write the header of the output "Name,Type,Rarity,BaseAttack"
-
-                        // TODO: use the writer to output the results.
+                        writer.WriteLine("Name,Type,Rarity,BaseAttack");
+                        foreach(var i in results)
+                        {
+                            writer.WriteLine(i.ToString());
+                        }
 
                         // TODO: print out the file has been saved.
+                        Console.WriteLine("Output file has been saved.");
                     }
                 }
                 else
@@ -201,13 +232,16 @@ namespace Assignment1
                 while (reader.Peek() > 0)
                 {
                     string line = reader.ReadLine();
-                    // string[] values = line.Split(',');
-
+                    string[] values = line.Split(',');
                     Weapon weapon = new Weapon();
-                    // TODO: validate that the string array the size expected.
-                    // TODO: use int.Parse or TryParse for stats/number values.
-                    // Populate the properties of the Weapon
-                    // TODO: Add the Weapon to the list
+                    if(values.Length == 4)
+                    {
+                        weapon.Name = values[0];
+                        weapon.Type = values[1];
+                        weapon.Rarity = int.Parse(values[2]);
+                        weapon.BaseAttack = int.Parse(values[3]);
+                    }
+                    output.Add(weapon);
                 }
             }
 

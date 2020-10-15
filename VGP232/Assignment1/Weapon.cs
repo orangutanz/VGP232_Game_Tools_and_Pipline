@@ -14,6 +14,7 @@ namespace Assignment1
         public int Rarity { get; set; }
         public int BaseAttack { get; set; }
 
+
         /// <summary>
         /// The Comparator function to check for name
         /// </summary>
@@ -24,11 +25,18 @@ namespace Assignment1
         {
             return left.Name.CompareTo(right.Name);
         }
-
-        // TODO: add sort for each property:
-        // CompareByType
-        // CompareByRarity
-        // CompareByBaseAttack
+        public static int CompareByType(Weapon left, Weapon right)
+        {
+            return left.Type.CompareTo(right.Type);
+        }
+        public static int CompareByRarity(Weapon left, Weapon right)
+        {
+            return left.Rarity.CompareTo(right.Rarity);
+        }
+        public static int CompareByBaseAttack(Weapon left, Weapon right)
+        {
+            return left.BaseAttack.CompareTo(right.BaseAttack);
+        }
 
         /// <summary>
         /// The Weapon string with all the properties
@@ -36,9 +44,8 @@ namespace Assignment1
         /// <returns>The Weapon formated string</returns>
         public override string ToString()
         {
-            // TODO: construct a comma seperated value string
             // Name,Type,Rarity,BaseAttack
-            return "This is not implemented";
+            return Name + "," + Type + "," + Rarity + "," + BaseAttack;
         }
     }
 }
