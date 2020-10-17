@@ -7,6 +7,11 @@ using System.IO;
 // NAME: Yuhan Ma
 // STUDENT NUMBER: 1930014
 
+// MARKS: 99/100 Excellent work! When storing the sortColumnName, it does not need the validation as it's also done in the switch case statement before sort is called, but the default case should be when it doesn't trigger sort. Remember for the next assignment int.Parse will throw an exception, so you want to wrap it in a try-catch.
+
+// Does it compile? Yes
+// Does it produce the correct results? Yes
+
 namespace Assignment1
 {
     class MainClass
@@ -81,6 +86,8 @@ namespace Assignment1
                 {
                     sortEnabled = true;
                     ++i;
+
+                    // LC: could remove the check because you do it again in line 127
                     if(args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack")
                     {
                         sortColumnName = args[i];
@@ -140,6 +147,7 @@ namespace Assignment1
                         results.Sort(Weapon.CompareByBaseAttack);
                         Console.WriteLine("Sorting by BaseAttack.");
                         break;
+                    // LC: the default case can be the invalid choice where it prints invalid column name and not sort.
                     default:
                         results.Sort(Weapon.CompareByName);
                         Console.WriteLine("Sorting by Name.");
@@ -180,6 +188,8 @@ namespace Assignment1
                         // Hint: use writer.WriteLine
                         // TODO: write the header of the output "Name,Type,Rarity,BaseAttack"
                         writer.WriteLine("Name,Type,Rarity,BaseAttack");
+
+                        // LC: naming: use weapon instead of i and you don't need to call ToString() explicitly as it'll automatically invoke the ToString()
                         foreach(var i in results)
                         {
                             writer.WriteLine(i.ToString());
