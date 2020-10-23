@@ -12,7 +12,7 @@ using System.IO;
 // Does it compile? Yes
 // Does it produce the correct results? Yes
 
-namespace Assignment1
+namespace Assignment2a
 {
     class MainClass
     {
@@ -44,7 +44,6 @@ namespace Assignment1
 
             // The results to be output to a file or to the console
             List<Weapon> results = new List<Weapon>();
-            
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -89,7 +88,7 @@ namespace Assignment1
                     ++i;
 
                     // LC: could remove the check because you do it again in line 127
-                    if(args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack")
+                    if (args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack")
                     {
                         sortColumnName = args[i];
                     }
@@ -130,7 +129,7 @@ namespace Assignment1
             if (sortEnabled)
             {
                 // TODO: add implementation to determine the column name to trigger a different sort. (Hint: column names are the 4 properties of the weapon class)
-                switch(sortColumnName)
+                switch (sortColumnName)
                 {
                     case "Name":
                         results.Sort(Weapon.CompareByName);
@@ -169,7 +168,7 @@ namespace Assignment1
                 if (!string.IsNullOrEmpty(outputFile))
                 {
                     FileStream fs;
-                    
+
                     // Check if the append flag is set, and if so, then open the file in append mode; otherwise, create the file to write.
                     if (appendToFile && File.Exists((outputFile)))
                     {
@@ -191,7 +190,7 @@ namespace Assignment1
                         writer.WriteLine("Name,Type,Rarity,BaseAttack");
 
                         // LC: naming: use weapon instead of i and you don't need to call ToString() explicitly as it'll automatically invoke the ToString()
-                        foreach(var i in results)
+                        foreach (var i in results)
                         {
                             writer.WriteLine(i.ToString());
                         }
@@ -245,7 +244,7 @@ namespace Assignment1
                     string line = reader.ReadLine();
                     string[] values = line.Split(',');
                     Weapon weapon = new Weapon();
-                    if(values.Length == 4)
+                    if (values.Length == 4)
                     {
                         weapon.Name = values[0];
                         weapon.Type = values[1];
