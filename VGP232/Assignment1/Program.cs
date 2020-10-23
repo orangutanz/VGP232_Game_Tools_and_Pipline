@@ -44,7 +44,6 @@ namespace Assignment1
 
             // The results to be output to a file or to the console
             List<Weapon> results = new List<Weapon>();
-            
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -85,11 +84,9 @@ namespace Assignment1
                 }
                 else if (args[i] == "-s" || args[i] == "--sort")
                 {
-                    sortEnabled = true;
                     ++i;
-
                     // LC: could remove the check because you do it again in line 127
-                    if(args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack")
+                    if(args[i] == "Name" || args[i] == "Type" || args[i] == "Rarity" || args[i] == "BaseAttack" )
                     {
                         sortColumnName = args[i];
                     }
@@ -129,7 +126,6 @@ namespace Assignment1
 
             if (sortEnabled)
             {
-                // TODO: add implementation to determine the column name to trigger a different sort. (Hint: column names are the 4 properties of the weapon class)
                 switch(sortColumnName)
                 {
                     case "Name":

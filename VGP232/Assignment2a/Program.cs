@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 // TODO: Fill in your name and student number.
 // Assignment 1
@@ -19,8 +20,8 @@ namespace Assignment2a
         public static void Main(string[] args)
         {
             //Commands for testing
-            //args = new string[]{ "-i", "data.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
-            //args = new string[]{ "-i", "data.csv", "-o", "output.csv" };//for testing
+            args = new string[]{ "-i", "data2.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
+            //args = new string[]{ "-i", "data2.csv", "-o", "output.csv" };//for testing
 
             // Variables and flags
 
@@ -43,7 +44,7 @@ namespace Assignment2a
             string sortColumnName = string.Empty;
 
             // The results to be output to a file or to the console
-            List<Weapon> results = new List<Weapon>();
+            WeaponCollection results = new WeaponCollection();      
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -77,8 +78,7 @@ namespace Assignment2a
                         }
                         else
                         {
-                            // This function returns a List<Weapon> once the data is parsed.
-                            results = Parse(inputFile);
+                            results.Load(inputFile);
                         }
                     }
                 }
@@ -116,7 +116,6 @@ namespace Assignment2a
                         else
                         {
                             outputFile = filePath;
-                            // TODO: set the output file to the outputFile
                         }
                     }
                 }
@@ -128,7 +127,6 @@ namespace Assignment2a
 
             if (sortEnabled)
             {
-                // TODO: add implementation to determine the column name to trigger a different sort. (Hint: column names are the 4 properties of the weapon class)
                 switch (sortColumnName)
                 {
                     case "Name":
@@ -149,13 +147,9 @@ namespace Assignment2a
                         break;
                     // LC: the default case can be the invalid choice where it prints invalid column name and not sort.
                     default:
-                        results.Sort(Weapon.CompareByName);
-                        Console.WriteLine("Sorting by Name.");
+                        Console.WriteLine("Invalid sort name. Not sorted.");
                         break;
                 }
-                // print: Sorting by <column name> e.g. BaseAttack
-
-                // Sorts the list based off of the Weapon name.
             }
 
             if (displayCount)
@@ -185,17 +179,14 @@ namespace Assignment2a
                     using (StreamWriter writer = new StreamWriter(fs))
                     {
 
-                        // Hint: use writer.WriteLine
-                        // TODO: write the header of the output "Name,Type,Rarity,BaseAttack"
-                        writer.WriteLine("Name,Type,Rarity,BaseAttack");
+                        writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
 
                         // LC: naming: use weapon instead of i and you don't need to call ToString() explicitly as it'll automatically invoke the ToString()
-                        foreach (var i in results)
+                        foreach (var weapon in results)
                         {
-                            writer.WriteLine(i.ToString());
+                            writer.WriteLine(weapon);
                         }
 
-                        // TODO: print out the file has been saved.
                         Console.WriteLine("Output file has been saved.");
                     }
                 }
@@ -212,50 +203,5 @@ namespace Assignment2a
             Console.WriteLine("Done!");
         }
 
-        /// <summary>
-        /// Reads the file and line by line parses the data into a List of Weapons
-        /// </summary>
-        /// <param name="fileName">The path to the file</param>
-        /// <returns>The list of Weapons</returns>
-        public static List<Weapon> Parse(string fileName)
-        {
-            // TODO: implement the streamreader that reads the file and appends each line to the list
-            // note that the result that you get from using read is a string, and needs to be parsed 
-            // to an int for certain fields i.e. HP, Attack, etc.
-            // i.e. int.Parse() and if the results cannot be parsed it will throw an exception
-            // or can use int.TryParse() 
-
-            // streamreader https://msdn.microsoft.com/en-us/library/system.io.streamreader(v=vs.110).aspx
-            // Use string split https://msdn.microsoft.com/en-us/library/system.string.split(v=vs.110).aspx
-
-            List<Weapon> output = new List<Weapon>();
-
-            using (StreamReader reader = new StreamReader(fileName))
-            {
-                // Skip the first line because header does not need to be parsed.
-                // Name,Type,Rarity,BaseAttack
-
-                string header = reader.ReadLine();
-
-                // The rest of the lines looks like the following:
-                // Skyward Blade,Sword,5,46
-                while (reader.Peek() > 0)
-                {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(',');
-                    Weapon weapon = new Weapon();
-                    if (values.Length == 4)
-                    {
-                        weapon.Name = values[0];
-                        weapon.Type = values[1];
-                        weapon.Rarity = int.Parse(values[2]);
-                        weapon.BaseAttack = int.Parse(values[3]);
-                    }
-                    output.Add(weapon);
-                }
-            }
-
-            return output;
-        }
     }
 }

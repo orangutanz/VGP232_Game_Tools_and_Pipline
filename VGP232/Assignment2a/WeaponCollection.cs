@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Assignment2a
 {
     public class WeaponCollection : List<Weapon>, IPeristence
     {
-        int GetHighestBaseAttack()
+        public int GetHighestBaseAttack()
         {
             int result = 0;
             foreach (var i in this)
@@ -20,7 +21,7 @@ namespace Assignment2a
             }
             return result;
         }
-        int GetLowestBaseAttack()
+        public int GetLowestBaseAttack()
         {
             int result = 999999999;
             if (this.Count == 0)
@@ -34,7 +35,7 @@ namespace Assignment2a
             }
             return result;
         }
-        List<Weapon> GetAllWeaponsOfType(WeaponType type)
+        public List<Weapon> GetAllWeaponsOfType(WeaponType type)
         {
             List<Weapon> result = new List<Weapon>();
             foreach (var i in this)
@@ -46,7 +47,7 @@ namespace Assignment2a
             }
             return result;
         }
-        List<Weapon> GetAllWeaponsOfRarity(int stars)
+        public List<Weapon> GetAllWeaponsOfRarity(int stars)
         {
             List<Weapon> result = new List<Weapon>();
             foreach (var i in this)
@@ -58,7 +59,7 @@ namespace Assignment2a
             }
             return result;
         }
-        void SortBy(string columnName)
+        public void SortBy(string columnName)
         {
             switch(columnName)
             {
@@ -84,56 +85,39 @@ namespace Assignment2a
             }
         }
 
-        bool IPeristence.Save(string filename)
+        public bool Save(string filename)
         {
-            return false;
-        }
+            throw new NotImplementedException();
 
-        bool IPeristence.Load(string filename)
-        {
-            using (StreamReader reader = new StreamReader(filename))
+        }
+        
+        public bool Load(string filename)
+        {            
+            using (StreamReader reader = new StreamReader(filename)) 
             {
                 string header = reader.ReadLine();
-                //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
+                if (header.Length == 0)
+                {
+                    Console.WriteLine("Nothing to load in the file.");
+                    return false;
+                }
                 while (reader.Peek() > 0)
                 {
+                    //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
                     string line = reader.ReadLine();
                     string[] values = line.Split(',');
                     Weapon weapon = new Weapon();
-                    if (values.Length == 7)
+                    if(Weapon.TryParse(values,out weapon))
                     {
-                        weapon.Name = values[0];
-                        switch(values[1])
-                        {
-                            case "Sword":
-                                weapon.Type = WeaponType.Sword;
-                                break;
-                            case "Polearm":
-                                weapon.Type = WeaponType.Polearm;
-                                break;
-                            case "Claymore":
-                                weapon.Type = WeaponType.Claymore;
-                                break;
-                            case "Catalyst":
-                                weapon.Type = WeaponType.Catalyst;
-                                break;
-                            case "Bow":
-                                weapon.Type = WeaponType.Bow;
-                                break;
-                            default:
-                                weapon.Type = WeaponType.None;
-                                break;
-                        }
-                        weapon.Image = values[2];
-                        weapon.Rarity = int.Parse(values[3]);
-                        weapon.BaseAttack = int.Parse(values[4]);
-                        weapon.SecondaryStat = values[5];
-                        weapon.Passive = values[6];
+                        this.Add(weapon);
                     }
-                    this.Add(weapon);
+                    else
+                    {
+
+                    }
                 }
+                return true;
             }
-            return false;
             // TODO: implement the streamreader that reads the file and appends each line to the list
             // note that the result that you get from using read is a string, and needs to be parsed 
             // to an int for certain fields i.e. HP, Attack, etc.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,65 @@ namespace Assignment2a
         // Name,Type,Rarity,BaseAttack
         public string Name { get; set; }
         public WeaponType Type { get; set; }
+        public string Image { get; set; }
         public int Rarity { get; set; }
         public int BaseAttack { get; set; }
-        public string Image { get; set; }
         public string SecondaryStat { get; set; }
         public string Passive { get; set; }
 
-        static public bool TryParse(string rawData, out Weapon weapon);
+        static public bool TryParse(string[] rawData, out Weapon weapon)
+        {
+            weapon = new Weapon();
+            try
+            {
+                if (rawData.Length != 7)
+                {
+                    throw new Exception("Invalid amount of data.(not match with weapon class.)");
+                }
+                else
+                {
+                    //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
+                    int number;
+                    weapon.Name = rawData[0];
+                    switch (rawData[1])
+                    {
+                        case "Sword":
+                            weapon.Type = WeaponType.Sword;
+                            break;
+                        case "Polearm":
+                            weapon.Type = WeaponType.Polearm;
+                            break;
+                        case "Claymore":
+                            weapon.Type = WeaponType.Claymore;
+                            break;
+                        case "Catalyst":
+                            weapon.Type = WeaponType.Catalyst;
+                            break;
+                        case "Bow":
+                            weapon.Type = WeaponType.Bow;
+                            break;
+                        default:
+                            weapon.Type = WeaponType.None;
+                            break;
+                    }
+                    weapon.Image = rawData[2];
+                    if (!int.TryParse(rawData[3], out number))
+                        throw new Exception("Invalid weapon Rarity datatype.");
+                    weapon.Rarity = int.Parse(rawData[3]);
+                    if (!int.TryParse(rawData[4], out number))
+                        throw new Exception("Invalid weapon BaseAttack datatype.");
+                    weapon.BaseAttack = int.Parse(rawData[4]);
+                    weapon.SecondaryStat = rawData[5];
+                    weapon.Passive = rawData[6];
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+                return false;
+            }
+            return true;
+        }
 
         /// <summary>
         /// The Comparator function to check for name
