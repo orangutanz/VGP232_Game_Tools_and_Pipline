@@ -19,7 +19,7 @@ namespace Assignment2a
 {
     public class Weapon
     {
-        // Name,Type,Rarity,BaseAttack
+        //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
         public string Name { get; set; }
         public WeaponType Type { get; set; }
         public string Image { get; set; }
@@ -28,21 +28,23 @@ namespace Assignment2a
         public string SecondaryStat { get; set; }
         public string Passive { get; set; }
 
-        static public bool TryParse(string[] rawData, out Weapon weapon)
+        static public bool TryParse(string rawData, out Weapon weapon)
         {
-            weapon = new Weapon();
+            weapon = null;
             try
             {
-                if (rawData.Length != 7)
+                string[] values = rawData.Split(',');
+                if (values.Length != 7)
                 {
                     throw new Exception("Invalid amount of data.(not match with weapon class.)");
                 }
                 else
                 {
+                    weapon = new Weapon();
                     //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
                     int number;
-                    weapon.Name = rawData[0];
-                    switch (rawData[1])
+                    weapon.Name = values[0];
+                    switch (values[1])
                     {
                         case "Sword":
                             weapon.Type = WeaponType.Sword;
@@ -63,15 +65,15 @@ namespace Assignment2a
                             weapon.Type = WeaponType.None;
                             break;
                     }
-                    weapon.Image = rawData[2];
-                    if (!int.TryParse(rawData[3], out number))
+                    weapon.Image = values[2];
+                    if (!int.TryParse(values[3], out number))
                         throw new Exception("Invalid weapon Rarity datatype.");
-                    weapon.Rarity = int.Parse(rawData[3]);
-                    if (!int.TryParse(rawData[4], out number))
+                    weapon.Rarity = int.Parse(values[3]);
+                    if (!int.TryParse(values[4], out number))
                         throw new Exception("Invalid weapon BaseAttack datatype.");
-                    weapon.BaseAttack = int.Parse(rawData[4]);
-                    weapon.SecondaryStat = rawData[5];
-                    weapon.Passive = rawData[6];
+                    weapon.BaseAttack = int.Parse(values[4]);
+                    weapon.SecondaryStat = values[5];
+                    weapon.Passive = values[6];
                 }
             }
             catch (Exception e)

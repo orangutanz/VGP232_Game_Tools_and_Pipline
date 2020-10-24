@@ -20,8 +20,13 @@ namespace Assignment2a
         public static void Main(string[] args)
         {
             //Commands for testing
-            args = new string[]{ "-i", "data2.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
+            //args = new string[]{ "-i", "data2.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
             //args = new string[]{ "-i", "data2.csv", "-o", "output.csv" };//for testing
+
+            UnitTests tests = new UnitTests();
+            tests.SetUp();
+            tests.WeaponCollection_SaveEmpty_TrueAndEmpty();
+            tests.CleanUp();
 
             // Variables and flags
 
@@ -159,36 +164,13 @@ namespace Assignment2a
 
             if (results.Count > 0)
             {
-                if (!string.IsNullOrEmpty(outputFile))
+                if (!string.IsNullOrEmpty(outputFile) && appendToFile)
                 {
-                    FileStream fs;
-
-                    // Check if the append flag is set, and if so, then open the file in append mode; otherwise, create the file to write.
-                    if (appendToFile && File.Exists((outputFile)))
-                    {
-                        Console.WriteLine("Output append to existing file.");
-                        fs = File.Open(outputFile, FileMode.Append);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Output to created new file.");
-                        fs = File.Open(outputFile, FileMode.Create);
-                    }
-
-                    // opens a stream writer with the file handle to write to the output file.
-                    using (StreamWriter writer = new StreamWriter(fs))
-                    {
-
-                        writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
-
-                        // LC: naming: use weapon instead of i and you don't need to call ToString() explicitly as it'll automatically invoke the ToString()
-                        foreach (var weapon in results)
-                        {
-                            writer.WriteLine(weapon);
-                        }
-
-                        Console.WriteLine("Output file has been saved.");
-                    }
+                    results.SaveAppend(outputFile);
+                }
+                else if(!string.IsNullOrEmpty(outputFile))
+                {
+                    results.Save(outputFile);
                 }
                 else
                 {
@@ -197,6 +179,7 @@ namespace Assignment2a
                     {
                         Console.WriteLine(results[i]);
                     }
+                    Console.WriteLine("Not saved to file.");
                 }
             }
 

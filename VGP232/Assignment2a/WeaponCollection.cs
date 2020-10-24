@@ -85,14 +85,55 @@ namespace Assignment2a
             }
         }
 
-        public bool Save(string filename)
+        public bool Save(string outputFile)
         {
-            throw new NotImplementedException();
+            FileStream fs;
+            fs = File.Open(outputFile, FileMode.Create);
+            Console.WriteLine("Output is saved to a new file.");
 
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
+                foreach (var weapon in this)
+                {
+                    writer.WriteLine(weapon);
+                }
+                Console.WriteLine("Output file has been saved.");
+            }
+            return true;
+
+        }
+        public bool SaveAppend(string outputFile)
+        {
+            if(!File.Exists(outputFile))
+            {
+                Console.WriteLine("Output file not found."); 
+                return false;
+            }
+
+            FileStream fs;
+            fs = File.Open(outputFile, FileMode.Append);
+            Console.WriteLine("Output is append to existing file.");
+
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");                                
+                foreach (var weapon in this)
+                {
+                    writer.WriteLine(weapon);
+                }
+                Console.WriteLine("Output file has been saved.");
+            }
+            return true;
         }
         
         public bool Load(string filename)
-        {            
+        {
+            if (!File.Exists(filename))
+            {
+                Console.WriteLine(filename + " not found.");
+                return false;
+            }
             using (StreamReader reader = new StreamReader(filename)) 
             {
                 string header = reader.ReadLine();
@@ -101,31 +142,35 @@ namespace Assignment2a
                     Console.WriteLine("Nothing to load in the file.");
                     return false;
                 }
+                int row = 1;
                 while (reader.Peek() > 0)
                 {
                     //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
                     string line = reader.ReadLine();
-                    string[] values = line.Split(',');
-                    Weapon weapon = new Weapon();
-                    if(Weapon.TryParse(values,out weapon))
+                    Weapon weapon = null;
+                    try
                     {
-                        this.Add(weapon);
+                        if (!Weapon.TryParse(line, out weapon))
+                        {
+                            //know wich weapon is failed to load.
+                            throw new Exception("Fail to load a weapon at row_" + row);
+                        }
+                        else
+                        {
+                            this.Add(weapon);
+                        }
                     }
-                    else
+                    catch(Exception e)
                     {
-
+                        Console.WriteLine("{0} Exception caught.", e);
+                        return false;
                     }
+                    
+                    ++row;
                 }
                 return true;
             }
-            // TODO: implement the streamreader that reads the file and appends each line to the list
-            // note that the result that you get from using read is a string, and needs to be parsed 
-            // to an int for certain fields i.e. HP, Attack, etc.
-            // i.e. int.Parse() and if the results cannot be parsed it will throw an exception
-            // or can use int.TryParse() 
-
-            // streamreader https://msdn.microsoft.com/en-us/library/system.io.streamreader(v=vs.110).aspx
-            // Use string split https://msdn.microsoft.com/en-us/library/system.string.split(v=vs.110).aspx
         }
+
     }
 }
