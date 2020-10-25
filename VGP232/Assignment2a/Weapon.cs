@@ -44,6 +44,8 @@ namespace Assignment2a
                     //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
                     int number;
                     weapon.Name = values[0];
+
+                    // LC2: should be using enum.Parse so it'll throw exception when this cannot parse because the test for invalid data failed.
                     switch (values[1])
                     {
                         case "Sword":
@@ -107,6 +109,8 @@ namespace Assignment2a
             return left.BaseAttack.CompareTo(right.BaseAttack);
         }
 
+        // LC: need additional sorts for the other 
+
         /// <summary>
         /// The Weapon string with all the properties
         /// </summary>
@@ -114,6 +118,9 @@ namespace Assignment2a
         public override string ToString()
         {
             // Name,Type,Rarity,BaseAttack
+
+            // LC2: I don't think this is the right order. Name + "," + Type + "," + Image; +","+ Rarity + "," + BaseAttack + "," + Passive + "," + SecondaryStat
+            // i.e. "Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive"
             return Name + "," + Type + "," + Rarity + "," + BaseAttack + "," + Passive + "," + SecondaryStat + "," + Image;
         }
 

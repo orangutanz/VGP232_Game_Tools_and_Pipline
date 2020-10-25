@@ -4,14 +4,14 @@ using System.IO;
 using System.Reflection;
 
 // TODO: Fill in your name and student number.
-// Assignment 1
+// Assignment 2a
 // NAME: Yuhan Ma
 // STUDENT NUMBER: 1930014
 
-// MARKS: 99/100 Excellent work! When storing the sortColumnName, it does not need the validation as it's also done in the switch case statement before sort is called, but the default case should be when it doesn't trigger sort. Remember for the next assignment int.Parse will throw an exception, so you want to wrap it in a try-catch.
-
+// MARKS: 78/100 Good work! The WeaponCollection.Load needs to clear before it populates the elements. The Weapon.ToString the image property is not in the correct column.  The SortBy function should be invoked in Program.cs. The majority of the tests aren't running because it's not using the inputPath/outputPath and it's not calling Load in the setup function and the TryParse test should be using AreEqual instead of Equals. Please look for the // LC2 comments to find out how to fix them before you start on Assignment 2B.
 // Does it compile? Yes
 // Does it produce the correct results? Yes
+// Does all the tests pass? No. 2/10 tests passed
 
 namespace Assignment2a
 {
@@ -23,6 +23,7 @@ namespace Assignment2a
             //args = new string[]{ "-i", "data2.csv", "-o", "output.csv", "-c", "-s", "BaseAttack" };//for assignment1
             //args = new string[]{ "-i", "data2.csv", "-o", "output.csv" };//for testing
 
+            // LC2: you don't invoke the unit tests from main, you run them from the test explorer.
             UnitTests tests = new UnitTests();
             tests.SetUp();
             tests.WeaponCollection_SaveEmpty_TrueAndEmpty();
@@ -132,6 +133,8 @@ namespace Assignment2a
 
             if (sortEnabled)
             {
+                // LC2: should be invoking the results.SortBy(sortColumnName);
+
                 switch (sortColumnName)
                 {
                     case "Name":
@@ -164,6 +167,7 @@ namespace Assignment2a
 
             if (results.Count > 0)
             {
+                // LC2: nice that you added check to append, but we will ditch append in this assignment2a and and 2b
                 if (!string.IsNullOrEmpty(outputFile) && appendToFile)
                 {
                     results.SaveAppend(outputFile);

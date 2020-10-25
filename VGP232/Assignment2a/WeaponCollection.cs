@@ -61,9 +61,11 @@ namespace Assignment2a
         }
         public void SortBy(string columnName)
         {
+            // LC2: you may want to make it case insentive by calling columnName.ToLower() and the compare the lower case names.
+            // LC2: also missing the new properties.
             switch(columnName)
             {
-                case "Name":                    
+                case "Name":
                     this.Sort(Weapon.CompareByName);
                     Console.WriteLine("Sorting by Name.");
                     break;
@@ -79,7 +81,7 @@ namespace Assignment2a
                     this.Sort(Weapon.CompareByBaseAttack);
                     Console.WriteLine("Sorting by BaseAttack.");
                     break;
-                default:                    
+                default:
                     Console.WriteLine("Invalid sorting. Did not sort.");
                     break;
             }
@@ -103,6 +105,8 @@ namespace Assignment2a
             return true;
 
         }
+
+        // LC: in Assignment2A and B, we don't need to worry about the Append flag.
         public bool SaveAppend(string outputFile)
         {
             if(!File.Exists(outputFile))
@@ -117,7 +121,7 @@ namespace Assignment2a
 
             using (StreamWriter writer = new StreamWriter(fs))
             {
-                writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");                                
+                writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                 foreach (var weapon in this)
                 {
                     writer.WriteLine(weapon);
@@ -134,6 +138,7 @@ namespace Assignment2a
                 Console.WriteLine(filename + " not found.");
                 return false;
             }
+            
             using (StreamReader reader = new StreamReader(filename)) 
             {
                 string header = reader.ReadLine();
@@ -143,11 +148,13 @@ namespace Assignment2a
                     return false;
                 }
                 int row = 1;
+                // LC2: you forgot to this.Clear() before you populate the list, which is why when you run your tests it will fail get the the GetAllWeaponsOfType or OfRarity because there will be duplicates.
                 while (reader.Peek() > 0)
                 {
                     //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
                     string line = reader.ReadLine();
                     Weapon weapon = null;
+
                     try
                     {
                         if (!Weapon.TryParse(line, out weapon))

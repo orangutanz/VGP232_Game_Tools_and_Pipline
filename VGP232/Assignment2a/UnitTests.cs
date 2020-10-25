@@ -8,6 +8,8 @@ using NUnit.Framework;
 
 namespace Assignment2a
 {
+    // LC2: 2/8 Tests passed.
+
     [TestFixture]
     public class UnitTests
     {
@@ -29,6 +31,8 @@ namespace Assignment2a
         {
             inputPath = CombineToAppPath(INPUT_FILE);
             outputPath = CombineToAppPath(OUTPUT_FILE);
+            // LC2: you forgot to add this so majority of your test can succeed, but this only fixes 2 tests.
+            testCollection.Load(inputPath);
         }
 
         [TearDown]
@@ -48,6 +52,9 @@ namespace Assignment2a
             // Expected Value: 48
 
             // TODO: call WeaponCollection.GetHighestBaseAttack() and confirm that it matches the expected value using asserts.
+
+            // LC2: I would recommend using a variable in for the actual results i.e. int testCollection.GetHighestBaseAttack() so you can debug it.
+            // LC2: missed the testCollection.Load(inputFile) before you compare the results.
 
             Assert.IsTrue(testCollection.GetHighestBaseAttack() == 48);
         }
@@ -79,6 +86,8 @@ namespace Assignment2a
         public void WeaponCollection_LoadThatExistAndValid_True()
         {
             // TODO: load returns true, expect WeaponCollection with count of 95 .
+
+            // LC2: you're suppose to be using inputPath because there's usually a path issue.
             Assert.IsTrue(testCollection.Load(INPUT_FILE));
             Assert.IsTrue(testCollection.Count() == 95);
         }
@@ -87,6 +96,8 @@ namespace Assignment2a
         public void WeaponCollection_LoadThatDoesNotExist_FalseAndEmpty()
         {
             // TODO: load returns false, expect an empty WeaponCollection
+
+            // LC2: you're suppose to be using inputPath because there's usually a path issue.
             Assert.IsFalse(testCollection.Load(INPUT_FILE));
             Assert.IsTrue(testCollection.Count() == 0);
         }
@@ -95,8 +106,12 @@ namespace Assignment2a
         public void WeaponCollection_SaveWithValuesCanLoad_TrueAndNotEmpty()
         {
             // TODO: save returns true, load returns true, and WeaponCollection is not empty.
+
+            // LC2: you're suppose to be using inputPath because there's usually a path issue.
             Assert.IsTrue(testCollection.Load(INPUT_FILE));
             Assert.IsTrue(testCollection.Count > 0);
+
+            // LC2: you're suppose to be using outputPath because there's usually a path issue.
             Assert.IsTrue(testCollection.Save(OUTPUT_FILE));
 
         }
@@ -106,6 +121,8 @@ namespace Assignment2a
         {
             //After saving an empty WeaponCollection, load the file and expect WeaponCollection to be empty.
             testCollection.Clear();
+
+            // LC2: you're suppose to be using outputPath because there's usually a path issue.
             Assert.IsTrue(testCollection.Save(OUTPUT_FILE));
             Assert.IsTrue(testCollection.Load(OUTPUT_FILE));
             Assert.IsTrue(testCollection.Count == 0);
@@ -134,6 +151,9 @@ namespace Assignment2a
 
             //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
             Assert.IsTrue(Weapon.TryParse(line, out actual));
+
+            // LC2: apparently Equals is deprecated and should be using AreEqual instead
+            // Assert.AreEqual(expected.Name, actual.Name);
             Assert.Equals(expected.Name, actual.Name);
             Assert.Equals(expected.Type, actual.Type);
             Assert.Equals(expected.Image, actual.Image);
@@ -150,6 +170,8 @@ namespace Assignment2a
             // TODO: use "1,Bulbasaur,A,B,C,65,65", Weapon.TryParse returns false, and Weapon is null.
             string notWeapon = "1,Bulbasaur,A,B,C,65,65";
             Weapon result = null;
+
+            // LC2: this ends up returning true because you didn't use an enum.Parse
             Assert.IsFalse(Weapon.TryParse(notWeapon, out result));
             Assert.IsTrue(result == null);
         }
