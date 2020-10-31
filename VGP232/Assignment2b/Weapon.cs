@@ -15,7 +15,7 @@ public enum WeaponType
     None
 }
 
-namespace Assignment2a
+namespace Assignment2b
 {
     public class Weapon
     {
@@ -48,7 +48,7 @@ namespace Assignment2a
                     Enum.Parse(typeof(WeaponType), values[1]);
                     switch (values[1])
                     {
-                        
+
                         case "Sword":
                             weapon.Type = WeaponType.Sword;
                             break;

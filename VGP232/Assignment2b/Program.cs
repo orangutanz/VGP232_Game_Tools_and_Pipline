@@ -13,7 +13,7 @@ using System.Reflection;
 // Does it produce the correct results? Yes
 // Does all the tests pass? No. 2/10 tests passed
 
-namespace Assignment2a
+namespace Assignment2b
 {
     class MainClass
     {
@@ -24,7 +24,7 @@ namespace Assignment2a
             //args = new string[]{ "-i", "data2.csv", "-o", "output.csv" };//for testing
 
             // LC2: you don't invoke the unit tests from main, you run them from the test explorer.
-            
+
 
             // Variables and flags
 
@@ -47,7 +47,7 @@ namespace Assignment2a
             string sortColumnName = string.Empty;
 
             // The results to be output to a file or to the console
-            WeaponCollection results = new WeaponCollection();      
+            WeaponCollection results = new WeaponCollection();
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -133,7 +133,7 @@ namespace Assignment2a
 
                 switch (sortColumnName)
                 {
-                    case "Name":                        
+                    case "Name":
                         results.SortBy(sortColumnName);
                         Console.WriteLine("Sorting by Name.");
                         break;
@@ -167,7 +167,7 @@ namespace Assignment2a
                 {
                     results.SaveAppend(outputFile);
                 }
-                else if(!string.IsNullOrEmpty(outputFile))
+                else if (!string.IsNullOrEmpty(outputFile))
                 {
                     results.Save(outputFile);
                 }

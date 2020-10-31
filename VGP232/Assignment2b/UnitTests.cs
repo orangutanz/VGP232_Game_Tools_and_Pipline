@@ -6,10 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace Assignment2a
+namespace Assignment2b
 {
-    // LC2: 2/8 Tests passed.
-
     [TestFixture]
     public class UnitTests
     {
@@ -43,7 +41,7 @@ namespace Assignment2a
             {
                 File.Delete(outputPath);
             }
-            if(File.Exists("weapons.json"))
+            if (File.Exists("weapons.json"))
             {
                 File.Delete("weapons.json");
             }
@@ -54,6 +52,18 @@ namespace Assignment2a
             if (File.Exists("weapons.csv"))
             {
                 File.Delete("weapons.csv");
+            }
+            if (File.Exists("empty.json"))
+            {
+                File.Delete("empty.json");
+            }
+            if (File.Exists("empty.xml"))
+            {
+                File.Delete("empty.xml");
+            }
+            if (File.Exists("empty.csv"))
+            {
+                File.Delete("empty.csv");
             }
         }
 
@@ -69,7 +79,7 @@ namespace Assignment2a
             // LC2: missed the testCollection.Load(inputFile) before you compare the results.
 
             SetUp();
-            int result = testCollection.GetHighestBaseAttack();            
+            int result = testCollection.GetHighestBaseAttack();
             Assert.IsTrue(result == 48);
             CleanUp();
         }
@@ -198,10 +208,10 @@ namespace Assignment2a
             // TODO: use "1,Bulbasaur,A,B,C,65,65", Weapon.TryParse returns false, and Weapon is null.
             string notWeapon = "1,Bulbasaur,A,B,C,65,65";
             Weapon result = null;
-            
+
             // LC2: this ends up returning true because you didn't use an enum.Parse
-            
-            Assert.IsFalse(Weapon.TryParse(notWeapon, out result)); 
+
+            Assert.IsFalse(Weapon.TryParse(notWeapon, out result));
             Assert.IsTrue(result == null);
         }
 
@@ -275,6 +285,109 @@ namespace Assignment2a
             Assert.IsTrue(testCollection.SaveAsCSV(outputPath));
             inputPath = CombineToAppPath("weapons.csv");
             Assert.IsTrue(testCollection.LoadCSV(inputPath));
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_Load_Save_Load_ValidXml()
+        {
+            SetUp();
+            outputPath = CombineToAppPath("weapons.xml");
+            Assert.IsTrue(testCollection.Save(outputPath));
+            inputPath = CombineToAppPath("weapons.xml");
+            Assert.IsTrue(testCollection.Load(inputPath));
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_Load_SaveAsXML_LoadXML_ValidXml()
+        {
+            SetUp();
+            outputPath = CombineToAppPath("weapons.xml");
+            Assert.IsTrue(testCollection.SaveAsXML(outputPath));
+            inputPath = CombineToAppPath("weapons.xml");
+            Assert.IsTrue(testCollection.LoadXML(inputPath));
+            CleanUp();
+
+        }
+
+        [Test]
+        public void WeaponCollection_SaveEmpty_Load_ValidJson()
+        {
+            WeaponCollection empty = new WeaponCollection();
+            outputPath = CombineToAppPath("empty.json");
+            Assert.IsTrue(empty.SaveAsJSON(outputPath));
+            inputPath = CombineToAppPath("empty.json");
+            Assert.IsTrue(testCollection.Load(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_SaveEmpty_Load_ValidCsv()
+        {
+            WeaponCollection empty = new WeaponCollection();
+            outputPath = CombineToAppPath("empty.csv");
+            Assert.IsTrue(empty.SaveAsJSON(outputPath));
+            inputPath = CombineToAppPath("empty.csv");
+            Assert.IsTrue(testCollection.Load(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_SaveEmpty_Load_ValidXml()
+        {
+            WeaponCollection empty = new WeaponCollection();
+            outputPath = CombineToAppPath("empty.xml");
+            Assert.IsTrue(empty.SaveAsJSON(outputPath));
+            inputPath = CombineToAppPath("empty.xml");
+            Assert.IsTrue(testCollection.Load(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_Load_SaveJSON_LoadXML_InvalidXml()
+        {
+            SetUp();
+            outputPath = CombineToAppPath("weapons.json");
+            Assert.IsTrue(testCollection.SaveAsJSON(outputPath));
+            inputPath = CombineToAppPath("weapons.json");
+            Assert.IsFalse(testCollection.LoadXML(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_Load_SaveXML_LoadJSON_InvalidJson()
+        {
+            SetUp();
+            outputPath = CombineToAppPath("weapons.xml");
+            Assert.IsTrue(testCollection.SaveAsXML(outputPath));
+            inputPath = CombineToAppPath("weapons.xml");
+            Assert.IsFalse(testCollection.LoadJSON(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+        [Test]
+        public void WeaponCollection_ValidCsv_LoadXML_InvalidXml()
+        {
+            inputPath = CombineToAppPath("data2.csv");
+            Assert.IsFalse(testCollection.LoadXML(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+            CleanUp();
+        }
+
+
+        [Test]
+        public void WeaponCollection_ValidCsv_LoadJSON_InvalidJson()
+        {
+            inputPath = CombineToAppPath("data2.csv");
+            Assert.IsFalse(testCollection.LoadJSON(inputPath));
+            Assert.IsTrue(testCollection.Count == 0);
+
             CleanUp();
         }
 

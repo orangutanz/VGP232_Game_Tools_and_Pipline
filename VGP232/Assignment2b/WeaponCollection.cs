@@ -8,16 +8,16 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Text.Json;
 
-namespace Assignment2a
+namespace Assignment2b
 {
-    public class WeaponCollection : List<Weapon>, IPeristence,IXmlSerializable,IJsonSerializable,ICsvSerializable
+    public class WeaponCollection : List<Weapon>, IPeristence, IXmlSerializable, IJsonSerializable, ICsvSerializable
     {
         public int GetHighestBaseAttack()
         {
             int result = 0;
             foreach (var i in this)
             {
-                if(i.BaseAttack > result)
+                if (i.BaseAttack > result)
                 {
                     result = i.BaseAttack;
                 }
@@ -66,7 +66,7 @@ namespace Assignment2a
         }
         public void SortBy(string columnName)
         {
-            switch(columnName.ToLower())
+            switch (columnName.ToLower())
             {
                 case "name":
                     this.Sort(Weapon.CompareByName);
@@ -87,7 +87,7 @@ namespace Assignment2a
                 case "secondarystat":
                     this.Sort(Weapon.CompareBySecondaryStat);
                     Console.WriteLine("Sorting by SecondaryStat.");
-                    break;                    
+                    break;
                 case "passive":
                     this.Sort(Weapon.CompareByPassive);
                     Console.WriteLine("Sorting by Passive.");
@@ -101,10 +101,10 @@ namespace Assignment2a
         public bool Save(string outputFile)
         {
             if (Path.GetExtension(outputFile) == ".xml")
-            {                
+            {
                 return SaveAsXML(outputFile);
             }
-            else if(Path.GetExtension(outputFile) == ".csv")
+            else if (Path.GetExtension(outputFile) == ".csv")
             {
                 return SaveAsCSV(outputFile);
             }
@@ -122,9 +122,9 @@ namespace Assignment2a
         // LC: in Assignment2A and B, we don't need to worry about the Append flag.
         public bool SaveAppend(string outputFile)
         {
-            if(!File.Exists(outputFile))
+            if (!File.Exists(outputFile))
             {
-                Console.WriteLine("Output file not found."); 
+                Console.WriteLine("Output file not found.");
                 return false;
             }
 
@@ -143,7 +143,7 @@ namespace Assignment2a
             }
             return true;
         }
-        
+
         public bool Load(string filename)
         {
             if (!File.Exists(filename))
@@ -152,12 +152,12 @@ namespace Assignment2a
                 return false;
             }
 
-            if(Path.GetExtension(filename)==".xml")
+            if (Path.GetExtension(filename) == ".xml")
             {
                 LoadXML(filename);
                 return true;
             }
-            else if(Path.GetExtension(filename) == ".json")
+            else if (Path.GetExtension(filename) == ".json")
             {
                 LoadJSON(filename);
                 return true;
@@ -185,12 +185,11 @@ namespace Assignment2a
                     if (header.Length == 0)
                     {
                         Console.WriteLine("Nothing to load in the file.");
-                        return false;
                     }
                     this.AddRange((WeaponCollection)xml.Deserialize(reader));
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -226,7 +225,6 @@ namespace Assignment2a
                     if (header.Length == 0)
                     {
                         Console.WriteLine("Nothing to load in the file.");
-                        return false;
                     }
 
                     this.AddRange((WeaponCollection)JsonSerializer.Deserialize<WeaponCollection>(reader.ReadToEnd()));
@@ -243,13 +241,14 @@ namespace Assignment2a
         {
             try
             {
+                
                 using (StreamWriter writer = new StreamWriter(path))
                 {
                     writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                     writer.Write(JsonSerializer.Serialize<WeaponCollection>(this));
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -265,7 +264,6 @@ namespace Assignment2a
                 if (header.Length == 0)
                 {
                     Console.WriteLine("Nothing to load in the file.");
-                    return false;
                 }
                 int row = 1;
                 // LC2: you forgot to this.Clear() before you populate the list, which is why when you run your tests it will fail get the the GetAllWeaponsOfType or OfRarity because there will be duplicates.
