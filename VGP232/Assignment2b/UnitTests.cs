@@ -221,12 +221,15 @@ namespace Assignment2b
         [Test]
         public void WeaponCollection_Load_Save_Load_ValidJson()
         {
+            // LC3: this doesn't need to be explicitly called the [SetUp] attribute in Setup() will make it called at the end of every test.
             SetUp();
+            // LC3: since the weapons.json, weapons.xml are always being used and this is called many times, why don't you use a new variable put it in the Setup()
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Save(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count() == 95);
+            // LC3: this doesn't need to be explicitly called the [TearDown] attribute in CleanUp() will make it called at the end of every test.
             CleanUp();
         }
 

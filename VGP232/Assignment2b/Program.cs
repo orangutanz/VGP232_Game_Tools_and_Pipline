@@ -4,14 +4,14 @@ using System.IO;
 using System.Reflection;
 
 // TODO: Fill in your name and student number.
-// Assignment 2a
+// Assignment 2b
 // NAME: Yuhan Ma
 // STUDENT NUMBER: 1930014
 
-// MARKS: 78/100 Good work! The WeaponCollection.Load needs to clear before it populates the elements. The Weapon.ToString the image property is not in the correct column.  The SortBy function should be invoked in Program.cs. The majority of the tests aren't running because it's not using the inputPath/outputPath and it's not calling Load in the setup function and the TryParse test should be using AreEqual instead of Equals. Please look for the // LC2 comments to find out how to fix them before you start on Assignment 2B.
+// MARKS: 95/100 Excellent work! Your json and xml load and save does not need a header; otherwise, they are not valid json/xml files.  The header only applies to CSV, and in all your tests, you don't need to call Setup and Cleanup explicitly the attribute [SetUp] is call before every test, and [TearDown] is called after every test.
 // Does it compile? Yes
-// Does it produce the correct results? Yes
-// Does all the tests pass? No. 2/10 tests passed
+// Does it produce the correct results? Almost, you don't need a header in the json and xml output otherwise it's not valid.
+// Does all the tests pass? Yes
 
 namespace Assignment2b
 {
@@ -130,6 +130,7 @@ namespace Assignment2b
             if (sortEnabled)
             {
                 // LC2: should be invoking the results.SortBy(sortColumnName);
+                // LC3: not fixed yet.
 
                 switch (sortColumnName)
                 {

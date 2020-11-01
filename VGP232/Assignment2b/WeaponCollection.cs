@@ -116,7 +116,6 @@ namespace Assignment2b
             {
                 return false;
             }
-
         }
 
         // LC: in Assignment2A and B, we don't need to worry about the Append flag.
@@ -180,6 +179,7 @@ namespace Assignment2b
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
+                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to XML.
                     string header = reader.ReadLine();
                     this.Clear();
                     if (header.Length == 0)
@@ -203,6 +203,7 @@ namespace Assignment2b
             {
                 using (StreamWriter writer = new StreamWriter(path))
                 {
+                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to XML.
                     writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                     xml.Serialize(writer, this);
                 }
@@ -221,6 +222,7 @@ namespace Assignment2b
                 this.Clear();
                 using (StreamReader reader = new StreamReader(path))
                 {
+                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to CSV.
                     string header = reader.ReadLine();
                     if (header.Length == 0)
                     {
@@ -244,6 +246,7 @@ namespace Assignment2b
                 
                 using (StreamWriter writer = new StreamWriter(path))
                 {
+                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to CSV.
                     writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                     writer.Write(JsonSerializer.Serialize<WeaponCollection>(this));
                 }
@@ -266,7 +269,7 @@ namespace Assignment2b
                     Console.WriteLine("Nothing to load in the file.");
                 }
                 int row = 1;
-                // LC2: you forgot to this.Clear() before you populate the list, which is why when you run your tests it will fail get the the GetAllWeaponsOfType or OfRarity because there will be duplicates.
+
                 while (reader.Peek() > 0)
                 {
                     //Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive
