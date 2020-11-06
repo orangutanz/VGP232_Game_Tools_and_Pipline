@@ -101,7 +101,7 @@ namespace Assignment2b
                 }
                 else if (args[i] == "-a" || args[i] == "--append")
                 {
-                    appendToFile = true;
+                    //appendToFile = true;
                 }
                 else if (args[i] == "-o" || args[i] == "--output")
                 {
