@@ -35,7 +35,7 @@ namespace Assignment2b
             string outputFile = string.Empty;
 
             // The flag to determine if we overwrite the output file or append to it.
-            bool appendToFile = false;
+            //bool appendToFile = false;
 
             // The flag to determine if we need to display the number of entries
             bool displayCount = false;
@@ -164,11 +164,8 @@ namespace Assignment2b
             if (results.Count > 0)
             {
                 // LC2: nice that you added check to append, but we will ditch append in this assignment2a and and 2b
-                if (!string.IsNullOrEmpty(outputFile) && appendToFile)
-                {
-                    results.SaveAppend(outputFile);
-                }
-                else if (!string.IsNullOrEmpty(outputFile))
+
+                if (!string.IsNullOrEmpty(outputFile))
                 {
                     results.Save(outputFile);
                 }

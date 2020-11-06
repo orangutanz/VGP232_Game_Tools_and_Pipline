@@ -118,30 +118,6 @@ namespace Assignment2b
             }
         }
 
-        // LC: in Assignment2A and B, we don't need to worry about the Append flag.
-        public bool SaveAppend(string outputFile)
-        {
-            if (!File.Exists(outputFile))
-            {
-                Console.WriteLine("Output file not found.");
-                return false;
-            }
-
-            FileStream fs;
-            fs = File.Open(outputFile, FileMode.Append);
-            Console.WriteLine("Output is append to existing file.");
-
-            using (StreamWriter writer = new StreamWriter(fs))
-            {
-                writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
-                foreach (var weapon in this)
-                {
-                    writer.WriteLine(weapon);
-                }
-                Console.WriteLine("Output file has been saved.");
-            }
-            return true;
-        }
 
         public bool Load(string filename)
         {
@@ -179,13 +155,7 @@ namespace Assignment2b
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to XML.
-                    string header = reader.ReadLine();
                     this.Clear();
-                    if (header.Length == 0)
-                    {
-                        Console.WriteLine("Nothing to load in the file.");
-                    }
                     this.AddRange((WeaponCollection)xml.Deserialize(reader));
                 }
             }
@@ -203,8 +173,6 @@ namespace Assignment2b
             {
                 using (StreamWriter writer = new StreamWriter(path))
                 {
-                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to XML.
-                    writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                     xml.Serialize(writer, this);
                 }
             }
@@ -222,13 +190,6 @@ namespace Assignment2b
                 this.Clear();
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to CSV.
-                    string header = reader.ReadLine();
-                    if (header.Length == 0)
-                    {
-                        Console.WriteLine("Nothing to load in the file.");
-                    }
-
                     this.AddRange((WeaponCollection)JsonSerializer.Deserialize<WeaponCollection>(reader.ReadToEnd()));
                 }
             }
@@ -246,8 +207,6 @@ namespace Assignment2b
                 
                 using (StreamWriter writer = new StreamWriter(path))
                 {
-                    // LC3: it should not have a header, otherwise, it's not a proper json file, the header only applies to CSV.
-                    writer.WriteLine("Name,Type,Image,Rarity,BaseAttack,SecondaryStat,Passive");
                     writer.Write(JsonSerializer.Serialize<WeaponCollection>(this));
                 }
             }

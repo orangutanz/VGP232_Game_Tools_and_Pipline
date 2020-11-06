@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Assignment2b
 {
-    interface IXmlSerializable
+    public interface IXmlSerializable
     {
         bool LoadXML(string path);
         bool SaveAsXML(string path);

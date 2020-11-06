@@ -221,97 +221,78 @@ namespace Assignment2b
         [Test]
         public void WeaponCollection_Load_Save_Load_ValidJson()
         {
-            // LC3: this doesn't need to be explicitly called the [SetUp] attribute in Setup() will make it called at the end of every test.
-            SetUp();
             // LC3: since the weapons.json, weapons.xml are always being used and this is called many times, why don't you use a new variable put it in the Setup()
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Save(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count() == 95);
-            // LC3: this doesn't need to be explicitly called the [TearDown] attribute in CleanUp() will make it called at the end of every test.
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveAsJSON_Load_ValidJson()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.SaveAsJSON(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count() == 95);
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveAsJSON_LoadJSON_ValidJson()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.SaveAsJSON(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.LoadJSON(inputPath));
             Assert.IsTrue(testCollection.Count() == 95);
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_Save_LoadJSON_ValidJson()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.Save(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.LoadJSON(inputPath));
             Assert.IsTrue(testCollection.Count() == 95);
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_Save_Load_ValidCsv()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.csv");
             Assert.IsTrue(testCollection.Save(outputPath));
             inputPath = CombineToAppPath("weapons.csv");
             Assert.IsTrue(testCollection.Load(inputPath));
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveAsCSV_LoadCSV_ValidCsv()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.csv");
             Assert.IsTrue(testCollection.SaveAsCSV(outputPath));
             inputPath = CombineToAppPath("weapons.csv");
             Assert.IsTrue(testCollection.LoadCSV(inputPath));
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_Save_Load_ValidXml()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.xml");
             Assert.IsTrue(testCollection.Save(outputPath));
             inputPath = CombineToAppPath("weapons.xml");
             Assert.IsTrue(testCollection.Load(inputPath));
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveAsXML_LoadXML_ValidXml()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.xml");
             Assert.IsTrue(testCollection.SaveAsXML(outputPath));
             inputPath = CombineToAppPath("weapons.xml");
             Assert.IsTrue(testCollection.LoadXML(inputPath));
-            CleanUp();
-
         }
 
         [Test]
@@ -323,7 +304,6 @@ namespace Assignment2b
             inputPath = CombineToAppPath("empty.json");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
         [Test]
@@ -335,7 +315,6 @@ namespace Assignment2b
             inputPath = CombineToAppPath("empty.csv");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
         [Test]
@@ -347,31 +326,26 @@ namespace Assignment2b
             inputPath = CombineToAppPath("empty.xml");
             Assert.IsTrue(testCollection.Load(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveJSON_LoadXML_InvalidXml()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.json");
             Assert.IsTrue(testCollection.SaveAsJSON(outputPath));
             inputPath = CombineToAppPath("weapons.json");
             Assert.IsFalse(testCollection.LoadXML(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
         [Test]
         public void WeaponCollection_Load_SaveXML_LoadJSON_InvalidJson()
         {
-            SetUp();
             outputPath = CombineToAppPath("weapons.xml");
             Assert.IsTrue(testCollection.SaveAsXML(outputPath));
             inputPath = CombineToAppPath("weapons.xml");
             Assert.IsFalse(testCollection.LoadJSON(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
         [Test]
@@ -380,7 +354,6 @@ namespace Assignment2b
             inputPath = CombineToAppPath("data2.csv");
             Assert.IsFalse(testCollection.LoadXML(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
-            CleanUp();
         }
 
 
@@ -391,7 +364,6 @@ namespace Assignment2b
             Assert.IsFalse(testCollection.LoadJSON(inputPath));
             Assert.IsTrue(testCollection.Count == 0);
 
-            CleanUp();
         }
 
 
