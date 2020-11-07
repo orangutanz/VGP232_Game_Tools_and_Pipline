@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Weapon Editor" Height="500" Width="400">
     <Grid>
+        <!-- LC: The grid was not created with it's definitions so all the button has fixed coordinates -->
         <Button Content="Load" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Width="60" Click="LoadClicked"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" Width="60" Click="SaveClicked"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="310,320,0,0" VerticalAlignment="Top" Width="60" Click="AddClicked"/>

@@ -15,6 +15,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WeaponLib;
 
+// Assignment 2c
+// NAME: Yuhan Ma
+// STUDENT NUMBER: 1930014
+
+// MARKS: 75/100 Great work! Functionally it works for save, load, remove and sort. Add and edit does not work. The open and save dialog does not have filters for the extensions (csv, json, xml) The Show Only type is missing. The UI has fixed coordiates for the buttons so when we stretch the window the listbox covers up the buttons. The Edit window should be using data binding for weapon. The edit and add mode does not change the title or submit button.  The Type is wrong, should be WeaponType enum with combobox. 
+// Does it compile? Yes
+// Does it produce the correct results? Kind of. Doesn't add or edit.
+// Is using databinding? No
+// Does the UI look like the mock up? Kind of. not resizable.
+// Is Assignment2B converted to a Class Library called WeaponLib? Yes
+
 namespace Assignment2c
 {
     /// <summary>
@@ -85,6 +96,7 @@ namespace Assignment2c
             WeaponListBox.Items.Refresh();
         }
 
+        // LC: this can be simplified using Tags by retrieving the tag from sender as RadioButton so all the event handlers can be the same.
         private void SortName(object sender, RoutedEventArgs e)
         {
             mWeaponCollection.SortBy("name");

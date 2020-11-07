@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Add Weapon" Height="500" Width="400">
     <Grid>
+        <!-- LC: missing the grid definitions so it's not resolution indepedent -->
         <Label Content="Name" HorizontalAlignment="Left" Margin="25,35,0,0" VerticalAlignment="Top"/>
         <Label Content="Type" HorizontalAlignment="Left" Margin="25,83,0,0" VerticalAlignment="Top"/>
         <Label Content="Image URL" HorizontalAlignment="Left" Margin="25,134,0,0" VerticalAlignment="Top"/>
@@ -16,6 +17,7 @@
         <Label Content="Passive" HorizontalAlignment="Left" Margin="25,306,0,0" VerticalAlignment="Top"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="252,440,0,0" VerticalAlignment="Top" Click="CancelClicked"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="325,440,0,0" VerticalAlignment="Top" Click="AddClicked"/>
+        <!--LC: should be using data binding -->
         <TextBox x:Name="TextName"  HorizontalAlignment="Left" Margin="80,39,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextType"  HorizontalAlignment="Left" Margin="80,87,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="TextImage"  HorizontalAlignment="Left" Margin="101,138,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
