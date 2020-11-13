@@ -9,11 +9,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New"></MenuItem>
-                <MenuItem Header="Open..." Click="OpenMenu"></MenuItem>
-                <MenuItem Header="Save"></MenuItem>
-                <MenuItem Header="Save As..."></MenuItem>
-                <MenuItem Header="Exit"></MenuItem>
+                <MenuItem Header="New" Click="MenuNew"></MenuItem>
+                <MenuItem Header="Open..." Click="MenuOpen"></MenuItem>
+                <MenuItem Header="Save" Click="MenuSave"></MenuItem>
+                <MenuItem Header="Save As..." Click="MenuSaveAs"></MenuItem>
+                <MenuItem Header="Exit" Click="MenuExit"></MenuItem>
             </MenuItem>
             <MenuItem Header="Edit"></MenuItem>
         </Menu>
@@ -51,14 +51,16 @@
                 <Button Content="Remove" Click="RemovePressed"/>
                 <Button Content="Generate" Click="GeneratePressed"/>
             </StackPanel>
-            <TextBox Name="tbOutputDir" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Height="17"/>
-            <TextBox Name="tbOutputFile" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="17"/>
-            <TextBox Name="tbColumns" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" Text="{Binding Columns}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="17"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Text="Columns" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" Text=".xml" TextWrapping="Wrap" VerticalAlignment="Center" Height="15" />
+            <TextBox x:Name="tbOutputDir" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2"  Text="{Binding OutputDirectory}" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Height="17"/>
+            <TextBox x:Name="tbOutputFile" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" Text="{Binding OutputFile}" DataContext="{Binding tbOutputFile}" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="17">
+            </TextBox>
+            <TextBox x:Name="tbColumns" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" Text="{Binding Columns}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="17"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" Text="{Binding OutputFile}" TextWrapping="Wrap" VerticalAlignment="Center" Height="15" />
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="Output Directory" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" Text="Filename(.png)" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Text="Columns" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
             <Button Content="Browse..." Grid.Column="3" HorizontalAlignment="Center" Margin="10" Grid.Row="2" VerticalAlignment="Top" Click="BrowsePressed"/>
+            <CheckBox Content="include meta data(.json)" Grid.Column="2" HorizontalAlignment="Right" Margin="0,9,10,0" Grid.Row="4" VerticalAlignment="Top" IsChecked="False"/>
         </Grid>
 
     </DockPanel>

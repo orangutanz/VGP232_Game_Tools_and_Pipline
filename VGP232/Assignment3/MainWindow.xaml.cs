@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 using TextureAtlasLib;
+
+// Assignment 3
+// NAME: Yuhan Ma
+// STUDENT NUMBER: 1930014
 
 namespace Assignment3
 {
@@ -22,27 +28,19 @@ namespace Assignment3
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string projectName { get; set; }
         public Spritesheet MySpriteSheets { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = MySpriteSheets;
             MySpriteSheets = new Spritesheet();
             MySpriteSheets.InputPaths = new List<String>();
-            DataContext = MySpriteSheets;
             lbImages.ItemsSource = MySpriteSheets.InputPaths;
+            
         }
 
 
-        private void OpenMenu(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            if(openFile.ShowDialog() == true)
-            {
-
-            }    
-        }
 
         private void AddPressed(object sender, RoutedEventArgs e)
         {
@@ -77,6 +75,74 @@ namespace Assignment3
         private void BrowsePressed(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFile = new SaveFileDialog();
+            if (saveFile.ShowDialog() == true)
+            {
+                tbOutputDir.Text = saveFile.FileName;
+                MySpriteSheets.OutputFile = saveFile.FileName;
+            }
+        }
+
+        private void MenuNew(object sender, RoutedEventArgs e)
+        {
+            MySpriteSheets.Columns = 0;
+            MySpriteSheets.OutputFile = null;
+            MySpriteSheets.OutputDirectory = null;
+            MySpriteSheets.IncludeMetaData = false;
+            MySpriteSheets.InputPaths.Clear();
+            lbImages.Items.Refresh();
+        }
+        private void MenuOpen(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == true)
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<String>));
+                try
+                {
+                    using (StreamReader reader = new StreamReader(openFile.FileName))
+                    {
+                        MySpriteSheets.InputPaths.Clear();
+                        MySpriteSheets.InputPaths = (List<String>)xml.Deserialize(reader);
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+        }
+
+        private void MenuSave(object sender, RoutedEventArgs e)
+        {
+
+            XmlSerializer xml = new XmlSerializer(typeof(Spritesheet));
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(MySpriteSheets.OutputFile))
+                {
+                    xml.Serialize(writer, MySpriteSheets);                     
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+    
+
+        private void MenuSaveAs(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            if (saveFile.ShowDialog() == true)
+            {
+                tbOutputDir.Text = saveFile.FileName;
+                MySpriteSheets.OutputFile = saveFile.FileName;
+            }
+            MenuSave(sender, e);
+        }
+
+        private void MenuExit(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
