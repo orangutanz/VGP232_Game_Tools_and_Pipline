@@ -1,0 +1,65 @@
+﻿<Window x:Class="Assignment3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assignment3"
+        mc:Ignorable="d"
+        Title="Sprite Sheet Generator" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New"></MenuItem>
+                <MenuItem Header="Open..." Click="OpenMenu"></MenuItem>
+                <MenuItem Header="Save"></MenuItem>
+                <MenuItem Header="Save As..."></MenuItem>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit"></MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="253*"/>
+                <ColumnDefinition Width="65*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="19*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="209*"/>
+                <RowDefinition Height="19*"/>
+            </Grid.RowDefinitions>
+            <ListBox Name="lbImages" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Margin="0,0,129,19" Grid.RowSpan="2">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" IsItemsHost="True"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Width="100" Source="{Binding}"></Image>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Column="3" Grid.Row="5" Margin="0,0,0,19" Grid.RowSpan="2">
+                <Button Content="Add" Click="AddPressed"/>
+                <Button Content="Remove" Click="RemovePressed"/>
+                <Button Content="Generate" Click="GeneratePressed"/>
+            </StackPanel>
+            <TextBox Name="tbOutputDir" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Height="17"/>
+            <TextBox Name="tbOutputFile" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="17"/>
+            <TextBox Name="tbColumns" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" Text="{Binding Columns}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="17"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Text="Columns" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" Text=".xml" TextWrapping="Wrap" VerticalAlignment="Center" Height="15" />
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Text="Output Directory" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" Text="Filename(.png)" TextWrapping="Wrap" VerticalAlignment="Center" Height="15"/>
+            <Button Content="Browse..." Grid.Column="3" HorizontalAlignment="Center" Margin="10" Grid.Row="2" VerticalAlignment="Top" Click="BrowsePressed"/>
+        </Grid>
+
+    </DockPanel>
+</Window>

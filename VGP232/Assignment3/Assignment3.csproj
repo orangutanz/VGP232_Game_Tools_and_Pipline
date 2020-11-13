@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="player_duck.png" />
+    <None Remove="player_fall.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TextureAtlasLib\TextureAtlasLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="player_duck.png" />
+    <Resource Include="player_fall.png" />
+  </ItemGroup>
+
+</Project>
