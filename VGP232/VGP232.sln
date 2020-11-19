@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment2c", "Assignment2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureAtlasLib", "TextureAtlasLib\TextureAtlasLib.csproj", "{A3A462BE-AE90-41C3-A885-5ED47D5885F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment3", "Assignment3\Assignment3.csproj", "{6CDE2328-1EA7-446D-BAEF-FB62E46B0183}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment3", "Assignment3\Assignment3.csproj", "{6CDE2328-1EA7-446D-BAEF-FB62E46B0183}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject_MB_Character_Editor", "FinalPorject_MB_Character_Editor\FinalProject_MB_Character_Editor.csproj", "{82504C35-0A49-47A2-A699-2E995E6B05E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{6CDE2328-1EA7-446D-BAEF-FB62E46B0183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CDE2328-1EA7-446D-BAEF-FB62E46B0183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CDE2328-1EA7-446D-BAEF-FB62E46B0183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82504C35-0A49-47A2-A699-2E995E6B05E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82504C35-0A49-47A2-A699-2E995E6B05E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82504C35-0A49-47A2-A699-2E995E6B05E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82504C35-0A49-47A2-A699-2E995E6B05E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
