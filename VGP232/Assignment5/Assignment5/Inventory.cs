@@ -60,6 +60,7 @@ namespace Assignment5
                 {
                     //take 1 out
                     found = i.Key;
+                    // LC: amount is not the same as quantity.
                     found.Amount = 1;
 
                     i.Key.Amount--;
@@ -67,6 +68,8 @@ namespace Assignment5
                     {
                         //reduce the amount
                         items[i.Key]--;
+
+                        // LC: you also need to increment the available slots here too.
                     }
                     else
                     {
@@ -92,19 +95,27 @@ namespace Assignment5
             // Reduce the slot once it's been added.
             // returns false if the inventory is full
 
+            // LC: you should check for availablity first if there's space
+
             foreach (var i in items)
             {
                 //increase the amount
                 if (string.Equals(i.Key.Name, item.Name))
                 {
                     items[i.Key]++;
+                    // LC: no the amount is not the same as the quanity, so you don't need this.
                     i.Key.Amount++;
+                    // LC: decrement slot here.
                     return true;
                 }
             }
+
+            // LC: this should go before you increment insert to the items dictionary. 
             //add new to the slot
             if (availableSlots > 0)
             {
+                // LC: this line and the one after are doing the same thing
+                // LC: the amount is not the same as the quanity, you're suppose to increment it by 1 if it already exist
                 items.Add(item, item.Amount);
                 items[item] = item.Amount;
                 availableSlots--;
@@ -128,11 +139,14 @@ namespace Assignment5
             List<Item> result = new List<Item>();
             foreach(var item in items)
             {
+                // LC: you should iterate through the item.Value to determine how many item.Key to add to the list.
                 result.Add(item.Key);
                 Console.WriteLine(item.Key.ToString());
 
                 for (int i = 0;i< items[item.Key] ;++i)
                 {
+                    // LC: missing the step to add the duplicates to the list.
+
                 }
             }
             return result;

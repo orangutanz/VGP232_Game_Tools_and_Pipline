@@ -5,6 +5,12 @@ namespace Assignment5
     // Assignment 5A
     // NAME: Yuhan Ma
     // STUDENT NUMBER: 1930014
+    // MARKS: 84/100 Great work, there's a misunderstanding with the inventory's items dictionary key value pair, where the value is an int, but it represents the quantity and item's amount represents a number for the item i.e. health potions that heals 10 amount of health. Also you should check if the inventory is full first before you add it to the items list.
+    // Does it compile? Yes
+    // Does it produce the correct results? No, the inventory had some wrong assumptions
+    // Does all the unit tests pass? Yes
+    // Was all the branches merged? Yes
+    // Where's the repo? https://github.com/orangutanz/VGP232_A5_FA20
 
     class Program
     {
