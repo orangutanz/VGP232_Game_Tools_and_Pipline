@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MnBLib;
 
 namespace FinalPorject_MB_Character_Editor
 {
@@ -20,11 +21,23 @@ namespace FinalPorject_MB_Character_Editor
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Character currentCharacter;
+        
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
+
+        private void MenuLoad(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void MenuSave(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void MenuSaveAs(object sender, RoutedEventArgs e)
         {
 
@@ -35,29 +48,31 @@ namespace FinalPorject_MB_Character_Editor
 
         }
 
-        private void MenuSave(object sender, RoutedEventArgs e)
+        private void btn_New(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MenuOpen(object sender, RoutedEventArgs e)
+        private void btn_Remove(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MenuNew(object sender, RoutedEventArgs e)
+        private void btn_Edit(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Reset_Click(object sender, RoutedEventArgs e)
+        private void btn_Reset(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Apply_Click(object sender, RoutedEventArgs e)
+        private void btn_Apply(object sender, RoutedEventArgs e)
         {
 
         }
+
+
     }
 }

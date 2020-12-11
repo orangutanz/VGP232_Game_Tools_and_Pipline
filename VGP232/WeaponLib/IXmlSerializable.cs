@@ -6,8 +6,8 @@ namespace WeaponLib
 {
     public interface IXmlSerializable
     {
-        bool LoadXML(string path);
-        bool SaveAsXML(string path);
+        public bool LoadXML(string path);
+        public bool SaveAsXML(string path);
 
     }
 }

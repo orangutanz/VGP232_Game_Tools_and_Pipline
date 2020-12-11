@@ -7,7 +7,7 @@ namespace WeaponLib
     // LC3: make this public
     public interface ICsvSerializable
     {
-        bool LoadCSV(string path);
-        bool SaveAsCSV(string path);
+        public bool LoadCSV(string path);
+        public bool SaveAsCSV(string path);
     }
 }
