@@ -87,7 +87,6 @@ namespace MnBLib
             archery = 60;
             crossbows = 60;
             throwing = 60;
-            firearms = 0;
         }
 
     }

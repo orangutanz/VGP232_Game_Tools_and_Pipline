@@ -6,12 +6,13 @@ using System.Xml.Serialization;
 
 namespace MnBLib
 {
-    class CharacterCollection : List<Character>
+    public class CharacterCollection : List<Character>
     {
-        public void GenerateCharacter()
+        public Character GenerateCharacter()
         {
             Character newChar = new Character();
             this.Add(newChar);
+            return newChar;
         }
         public void ApplyChangesToCharacter(Character newChar, int index)
         {
@@ -76,7 +77,7 @@ namespace MnBLib
             return true;
         }
 
-        CharacterCollection()
+        public CharacterCollection()
         {
 
         }

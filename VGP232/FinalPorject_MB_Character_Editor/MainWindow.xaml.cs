@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using MnBLib;
 
 namespace FinalPorject_MB_Character_Editor
@@ -22,7 +23,9 @@ namespace FinalPorject_MB_Character_Editor
     public partial class MainWindow : Window
     {
         public Character currentCharacter;
-        
+
+        public CharacterCollection myCharacterCollection = new CharacterCollection();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +53,13 @@ namespace FinalPorject_MB_Character_Editor
 
         private void btn_New(object sender, RoutedEventArgs e)
         {
+            currentCharacter = myCharacterCollection.GenerateCharacter();
+            tb_NAME.Text = currentCharacter.name;
+            tb_STR.Text = currentCharacter.strength.ToString();
+            tb_AGI.Text = currentCharacter.agility.ToString();
+            tb_INT.Text = currentCharacter.intelligence.ToString();
+            tb_CHR.Text = currentCharacter.charisma.ToString();
+            tb_1HWeapons.Text = currentCharacter.one_handed_weapons.ToString();
 
         }
 
@@ -63,16 +73,20 @@ namespace FinalPorject_MB_Character_Editor
 
         }
 
-        private void btn_Reset(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btn_Apply(object sender, RoutedEventArgs e)
         {
 
         }
 
+        private void btn_Reset(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }
