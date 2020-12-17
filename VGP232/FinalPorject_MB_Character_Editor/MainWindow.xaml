@@ -12,7 +12,6 @@
             <MenuItem Header="File">
                 <MenuItem Header="Load" Click="MenuLoad"></MenuItem>
                 <MenuItem Header="Save" Click="MenuSave"></MenuItem>
-                <MenuItem Header="Save As..." Click="MenuSaveAs"></MenuItem>
                 <MenuItem Header="Exit" Click="MenuExit"></MenuItem>
             </MenuItem>
         </Menu>
@@ -27,23 +26,35 @@
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="203"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="211"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
-            <ListBox Grid.Column="1" Margin="10,20,10,10" Grid.Row="1">
+            <ListBox Name="lb_CharacterList" Grid.Column="1" Margin="10,20,10,10" Grid.Row="1" SelectionChanged="listBox_SelectionChanged">
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
             <Button Content="New" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_New" Height="19" Width="30"/>
+            <Button Content="Duplicate" Grid.Column="1" HorizontalAlignment="Left" Margin="50,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_Duplicate" Height="19" Width="60"/>
             <Button Content="Remove" Grid.Column="1" HorizontalAlignment="Left" Margin="138,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_Remove" Height="19" Width="50"/>
-            <Button Content="Edit" Grid.Column="1" HorizontalAlignment="Left" Margin="50,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_Edit" Height="19" Width="26"/>
-            <Button Content="Reset" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,29,16" Grid.Row="2" VerticalAlignment="Bottom" Click="btn_Reset" Height="19" Width="35"/>
-            <Button Content="Apply" Grid.Column="3" HorizontalAlignment="Left" Margin="62,179,0,0" Grid.Row="2" VerticalAlignment="Top" Click="btn_Apply" Height="19" Width="37"/>
+
+            <Button Content="Reset" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,52,16" Grid.Row="2" VerticalAlignment="Bottom" Click="btn_Reset" Height="19" Width="35"/>
+            <Button Content="Apply" Grid.Column="3" HorizontalAlignment="Left" Margin="47,179,0,0" Grid.Row="2" VerticalAlignment="Top" Click="btn_Apply" Height="19" Width="37"/>
 
             <Grid Grid.Column="3" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="44*"/>
+                    <ColumnDefinition Width="153*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*"/>
@@ -54,19 +65,18 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
-                <Label HorizontalAlignment="Left" Margin="4,0,0,0" Content="Experience" VerticalAlignment="Center" Grid.Column="1" Height="25" Width="71"/>
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="1" Content="One Handed Weapons" VerticalAlignment="Center" Grid.Column="1" Height="26" Width="138"/>
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="2" Content="Two Handed Weapons" VerticalAlignment="Center" Grid.Column="1" Height="25" Width="138"/>
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="3" Content="Polearms" VerticalAlignment="Center" Grid.Column="1" Height="25" Width="62" />
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="4" Content="Archery" VerticalAlignment="Center" Grid.Column="1" Height="25" Width="54"/>
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="5" Content="Crossbows" VerticalAlignment="Center" Grid.Column="1" Height="25" Width="71"/>
                 <Label HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="6" Content="Throwing" VerticalAlignment="Center" Grid.Column="1" Height="26" Width="63"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_1HWeapons" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="1"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_2HWeapons" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="2"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Polearms" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="3"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Archery" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="4"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Crossbows" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="5"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Throwing" Width="30" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="6"/>
+                <TextBox Text="{Binding s_one_handed_weapons}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_1HWeapons" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="1"/>
+                <TextBox Text="{Binding s_two_handed_weapons}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_2HWeapons" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="2"/>
+                <TextBox Text="{Binding s_polearms}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Polearms" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="3"/>
+                <TextBox Text="{Binding s_archery}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Archery" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="4"/>
+                <TextBox Text="{Binding s_crossbows}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Crossbows" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="5"/>
+                <TextBox Text="{Binding s_throwing}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Center" x:Name="tb_Throwing" Width="34" Height="15" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Row="6"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -82,11 +92,11 @@
                 <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Content="AGI" VerticalAlignment="Center"/>
                 <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" Content="INT" VerticalAlignment="Center"/>
                 <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Content="CHR" VerticalAlignment="Center"/>
-                <TextBox Name ="tb_NAME" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="0" Text="name" TextWrapping="Wrap" VerticalAlignment="Center" Width="90" />
-                <TextBox PreviewTextInput="NumberValidationTextBox" Name ="tb_STR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="1" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="90" />
-                <TextBox PreviewTextInput="NumberValidationTextBox" Name ="tb_AGI" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="2" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="90"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" Name ="tb_INT" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="3" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="90"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" Name ="tb_CHR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="4" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="90"/>
+                <TextBox Text="{Binding s_name}" MaxLength="24" Name ="tb_NAME" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="100" />
+                <TextBox Text="{Binding s_strength}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_STR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" />
+                <TextBox Text="{Binding s_agility}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_AGI" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+                <TextBox Text="{Binding s_intelligence}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_INT" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+                <TextBox Text="{Binding s_charisma}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_CHR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
 
             </Grid>
             <Grid  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
@@ -145,29 +155,29 @@
                 <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="21" Text="prisoner_management   " VerticalAlignment="Top" Grid.Column="3" Height="15" Width="138" />
                 <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="22" Text="leadership   " VerticalAlignment="Center" Grid.Column="3" Height="15" Width="68" />
                 <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="23" Text="trade   " VerticalAlignment="Center" Grid.Column="3" Height="15" Width="39" />
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_ironflesh" Grid.Row="1" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_strike" Grid.Row="2" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_throw" Grid.Row="3" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_draw" Grid.Row="4" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_weapon_master" Grid.Row="5" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_shield" Grid.Row="6" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_athletics" Grid.Row="7" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_riding" Grid.Row="8" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_looting" Grid.Row="9" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_trainer" Grid.Row="10" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_tracking" Grid.Row="11" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_tactics" Grid.Row="12" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_path_finding" Grid.Row="13" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_spotting" Grid.Row="14" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_inventory_management" Grid.Row="15" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_wound_treatment" Grid.Row="16" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_surgery" Grid.Row="17" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_first_aid" Grid.Row="18" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_engineer" Grid.Row="19" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_persuasion" Grid.Row="20" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_prisoner_management" Grid.Row="21" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_leadership" Grid.Row="22" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_trade" Grid.Row="23" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_ironflesh}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_ironflesh" Grid.Row="1" Width="20" Height="15" VerticalAlignment="Bottom" Grid.Column="1" Margin="4,0,0,1"/>
+                <TextBox Text="{Binding s_power_strike}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_strike" Grid.Row="2" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_power_throw}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_throw" Grid.Row="3" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_power_draw}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_power_draw" Grid.Row="4" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_weapon_master}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_weapon_master" Grid.Row="5" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_shield}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_shield" Grid.Row="6" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_athletics}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_athletics" Grid.Row="7" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_riding}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_riding" Grid.Row="8" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_looting}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_looting" Grid.Row="9" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_trainer}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_trainer" Grid.Row="10" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_tracking}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_tracking" Grid.Row="11" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_tactics}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_tactics" Grid.Row="12" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_path_finding}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_path_finding" Grid.Row="13" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_spotting}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_spotting" Grid.Row="14" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_inventory_management}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_inventory_management" Grid.Row="15" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_wound_treatment}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_wound_treatment" Grid.Row="16" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_surgery}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_surgery" Grid.Row="17" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_first_aid}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_first_aid" Grid.Row="18" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_engineer}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_engineer" Grid.Row="19" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_persuasion}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_persuasion" Grid.Row="20" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_prisoner_management}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_prisoner_management" Grid.Row="21" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_leadership}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_leadership" Grid.Row="22" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox Text="{Binding s_trade}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_trade" Grid.Row="23" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
 
             </Grid>
         </Grid>

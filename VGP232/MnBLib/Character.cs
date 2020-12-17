@@ -51,9 +51,9 @@ namespace MnBLib
         {
             name = "name";
 
-            strength = 5;
+            strength = 6;
             agility = 5;
-            intelligence = 5;
+            intelligence = 4;
             charisma = 5;
 
             trade = 0;
@@ -87,6 +87,48 @@ namespace MnBLib
             archery = 60;
             crossbows = 60;
             throwing = 60;
+        }
+        public Character(Character c)
+        {
+
+            name = c.name;
+
+            strength = c.strength;
+            agility = c.agility;
+            intelligence = c.intelligence;
+            charisma = c.charisma;
+
+            trade = c.trade;
+            leadership = c.leadership;
+            prisoner_management = c.prisoner_management;
+            persuasion = c.persuasion;
+            engineer = c.engineer;
+            first_aid = c.first_aid;
+            surgery = c.surgery;
+            wound_treatment = c.wound_treatment;
+            inventory_management = c.inventory_management;
+            spotting = c.spotting;
+            path_finding = c.path_finding;
+            tactics = c.tactics;
+            tracking = c.tracking;
+            trainer = c.trainer;
+            looting = c.looting;
+            horse_archery = c.horse_archery;
+            riding = c.riding;
+            athletics = c.athletics;
+            shield = c.shield;
+            weapon_master = c.weapon_master;
+            power_draw = c.power_draw;
+            power_throw = c.power_throw;
+            power_strike = c.power_strike;
+            ironflesh = c.ironflesh;
+
+            one_handed_weapons = c.one_handed_weapons;
+            two_handed_weapons = c.two_handed_weapons;
+            polearms = c.polearms;
+            archery = c.archery;
+            crossbows = c.crossbows;
+            throwing = c.throwing;
         }
 
     }

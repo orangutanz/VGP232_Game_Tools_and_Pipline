@@ -8,12 +8,11 @@ namespace MnBLib
 {
     public class CharacterCollection : List<Character>
     {
-        public Character GenerateCharacter()
+        public void AddCharacter(Character c)
         {
-            Character newChar = new Character();
-            this.Add(newChar);
-            return newChar;
+            this.Add(c);
         }
+
         public void ApplyChangesToCharacter(Character newChar, int index)
         {
             if (index > this.Count || index < 0 || this.Count == 0 || newChar == null)
@@ -22,6 +21,17 @@ namespace MnBLib
             }
             this[index] = newChar;
 
+        }
+        public void ApplyChangesToCharacter(Character newChar, string name)
+        {
+            for(int i = 0;i<this.Count;++i)
+            {
+                if (this[i].name == name)
+                {
+                    this[i] = newChar;
+                    return;
+                }
+            }
         }
         public void RemoveCharacter(int index)
         {
