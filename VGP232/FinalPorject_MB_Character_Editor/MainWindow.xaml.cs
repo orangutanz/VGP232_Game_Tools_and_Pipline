@@ -54,9 +54,9 @@ namespace FinalPorject_MB_Character_Editor
                 return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = myCharacterCollection[lb_CharacterList.SelectedIndex].name;
             if (saveFileDialog.ShowDialog() == true)
             {
-
                 myCharacterCollection.SaveXMLCharacter(saveFileDialog.FileName, lb_CharacterList.SelectedIndex);
             }
         }
