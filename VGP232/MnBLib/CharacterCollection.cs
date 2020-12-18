@@ -49,6 +49,10 @@ namespace MnBLib
             }
             this.Remove(chr);
         }
+
+        // LC: you mentioned that you want that custom format here, you'll need to do your own parsing like Assignment 1, 
+        // using StreamReader read line and seperate the line by the '=' character, trim it and use some kind of dictionary 
+        // or reflection to iterate through all the fields/properties to find where to set the value.
         public bool SaveXMLCharacter(string path, int index)
         {
             if (index > this.Count || index < 0)

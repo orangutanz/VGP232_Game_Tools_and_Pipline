@@ -4,6 +4,7 @@ using System.Text;
 
 namespace MnBLib
 {
+    // LC: if this class was implemented properly in a way that you can data bind, then you will need to implement the INotifyPropertyChanged and use full properties no auto properties.
     public class Character
     {
         public string name { get; set; }

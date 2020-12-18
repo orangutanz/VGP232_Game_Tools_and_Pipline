@@ -16,6 +16,22 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using MnBLib;
 
+
+// Final Project
+// NAME: Yuhan Ma
+// STUDENT NUMBER: 1930014
+
+// CODE:
+// MARKS: 80/100 Great work! The code can do some clean up if data binding was implemented properly, and I thought the challenging part would be getting the custom data parsing of that original data, but didn't get finished; otherwise, most of the work looks like the assignment 2.
+// Does it compile? Yes
+// Does it produce the correct results? Yes
+// Is using databinding? No
+// Does the UI look like the mock up? Yes
+
+// PRESENTATION:
+// MARKS: 16/20 Great work! Nice demo and look like a solid stable tool. Improvements: Get the data to be read from the original text format and saved in that text format instead of XML. Challenges: Data binding. Feedback: should ask for help earlier during class, or send question on teams so that the data binding can be addresd
+
+
 namespace FinalPorject_MB_Character_Editor
 {
     /// <summary>
@@ -63,7 +79,7 @@ namespace FinalPorject_MB_Character_Editor
 
         private void MenuExit(object sender, RoutedEventArgs e)
         {
-
+            // LC: empty function, should call this.Close();
         }
 
         private void btn_Duplicate(object sender, RoutedEventArgs e)
@@ -118,6 +134,7 @@ namespace FinalPorject_MB_Character_Editor
                 return;
             }
 
+            // LC: can definitely be improved if DataBinding was implemented properly.
             sCh.s_name = tb_NAME.Text;
             sCh.s_strength = tb_STR.Text;
             sCh.s_agility = tb_AGI.Text;
@@ -252,6 +269,7 @@ namespace FinalPorject_MB_Character_Editor
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
+            // LC: nice use of regular expressions to only allow numeric values
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -269,8 +287,11 @@ namespace FinalPorject_MB_Character_Editor
         }
     }
 
+    // LC: this should be in a different cs file, also should consider a private variable for Character and rename this as CharacterViewModel
+    // LC: also should use the INotifyPropertyChanged
     public class sCharacter
     {
+        // LC: should use private Character myCharacter;
 
         public sCharacter(Character source)
         {
@@ -356,6 +377,14 @@ namespace FinalPorject_MB_Character_Editor
 
             return ch;   
         }
+
+        // LC: should use.so that you can data bind it.
+        //public string name
+        //{
+        //    get { return myCharacter.name; }
+        //    set { myCharacter.name = value; NotifyPropertyChanged("name"); }
+        //}
+
 
         public string s_name { get; set; }
 
