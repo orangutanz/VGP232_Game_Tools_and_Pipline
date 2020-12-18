@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Character xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <name>Test_Case2</name>
+  <strength>1</strength>
+  <agility>8</agility>
+  <intelligence>6</intelligence>
+  <charisma>8</charisma>
+  <trade>7</trade>
+  <leadership>5</leadership>
+  <prisoner_management>5</prisoner_management>
+  <persuasion>7</persuasion>
+  <engineer>4</engineer>
+  <first_aid>7</first_aid>
+  <surgery>9</surgery>
+  <wound_treatment>5</wound_treatment>
+  <inventory_management>5</inventory_management>
+  <spotting>3</spotting>
+  <path_finding>6</path_finding>
+  <tactics>5</tactics>
+  <tracking>6</tracking>
+  <trainer>0</trainer>
+  <looting>5</looting>
+  <horse_archery>4</horse_archery>
+  <riding>3</riding>
+  <athletics>3</athletics>
+  <shield>1</shield>
+  <weapon_master>1</weapon_master>
+  <power_draw>8</power_draw>
+  <power_throw>1</power_throw>
+  <power_strike>1</power_strike>
+  <ironflesh>0</ironflesh>
+  <one_handed_weapons>58</one_handed_weapons>
+  <two_handed_weapons>71</two_handed_weapons>
+  <polearms>29</polearms>
+  <archery>42</archery>
+  <crossbows>78</crossbows>
+  <throwing>37</throwing>
+  <firearms>0</firearms>
+</Character>

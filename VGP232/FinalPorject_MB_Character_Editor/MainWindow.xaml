@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalPorject_MB_Character_Editor"
         mc:Ignorable="d"
-        Title="Character Editor" Height="500" Width="640"  WindowStyle="SingleBorderWindow">
+        Title="Character Editor" Height="520" Width="660" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
 
     <DockPanel LastChildFill="False" >
         <Menu DockPanel.Dock="Top">
@@ -17,10 +17,10 @@
         </Menu>
         <Grid Height="450" Width="650">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="200*"/>
-                <RowDefinition Height="200*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="214*"/>
+                <RowDefinition Height="213*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
@@ -48,8 +48,8 @@
             <Button Content="Duplicate" Grid.Column="1" HorizontalAlignment="Left" Margin="50,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_Duplicate" Height="19" Width="60"/>
             <Button Content="Remove" Grid.Column="1" HorizontalAlignment="Left" Margin="138,0,0,0" Grid.Row="1" VerticalAlignment="Top" Click="btn_Remove" Height="19" Width="50"/>
 
-            <Button Content="Reset" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,52,16" Grid.Row="2" VerticalAlignment="Bottom" Click="btn_Reset" Height="19" Width="35"/>
-            <Button Content="Apply" Grid.Column="3" HorizontalAlignment="Left" Margin="47,179,0,0" Grid.Row="2" VerticalAlignment="Top" Click="btn_Apply" Height="19" Width="37"/>
+            <Button Content="Reset" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="2" VerticalAlignment="Bottom" Click="btn_Reset" Height="22" Width="40"/>
+            <Button Content="Apply" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Bottom" Click="btn_Apply" Height="22" Width="40"/>
 
             <Grid Grid.Column="3" Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
                     <ColumnDefinition Width="153*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
@@ -80,23 +80,23 @@
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
-                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="0" Content="Name"  VerticalAlignment="Center" />
-                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" Content="STR" VerticalAlignment="Center"/>
-                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Content="AGI" VerticalAlignment="Center"/>
-                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" Content="INT" VerticalAlignment="Center"/>
-                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Content="CHR" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding s_name}" MaxLength="24" Name ="tb_NAME" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="100" />
-                <TextBox Text="{Binding s_strength}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_STR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" />
-                <TextBox Text="{Binding s_agility}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_AGI" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
-                <TextBox Text="{Binding s_intelligence}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_INT" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
-                <TextBox Text="{Binding s_charisma}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_CHR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" Content="Name"  VerticalAlignment="Center" />
+                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" Content="STR" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" Content="AGI" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" Content="INT" VerticalAlignment="Center"/>
+                <Label HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" Content="CHR" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding s_name}" MaxLength="24" Name ="tb_NAME" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="100" />
+                <TextBox Text="{Binding s_strength}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_STR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="50" />
+                <TextBox Text="{Binding s_agility}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_AGI" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+                <TextBox Text="{Binding s_intelligence}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_INT" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
+                <TextBox Text="{Binding s_charisma}" MaxLength="4" PreviewTextInput="NumberValidationTextBox" Name ="tb_CHR" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="50"/>
 
             </Grid>
             <Grid  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
@@ -180,7 +180,7 @@
                 <TextBox Text="{Binding s_trade}" MaxLength="2" PreviewTextInput="NumberValidationTextBox" HorizontalAlignment="Left" Name="tb_trade" Grid.Row="23" Width="20" Height="15" VerticalAlignment="Center" Grid.Column="1" Margin="4,0,0,0"/>
 
             </Grid>
+            <Image Source="/MnB.png" Grid.Column="3" HorizontalAlignment="Left" Height="160" Width="160" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" />
         </Grid>
-        <Button Content="Button" Width="Auto"/>
     </DockPanel>
 </Window>

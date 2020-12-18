@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MnB.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MnBLib\MnBLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CharactersFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MnB.png" />
   </ItemGroup>
 
 </Project>

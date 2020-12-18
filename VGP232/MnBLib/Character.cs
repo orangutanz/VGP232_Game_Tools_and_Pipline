@@ -49,44 +49,45 @@ namespace MnBLib
 
         public Character()
         {
+            Random rnd = new Random();
             name = "name";
+            
+            strength = rnd.Next(1, 12);
+            agility = rnd.Next(1, 12);
+            intelligence = rnd.Next(1, 12);
+            charisma = rnd.Next(1, 12);
 
-            strength = 6;
-            agility = 5;
-            intelligence = 4;
-            charisma = 5;
+            trade = rnd.Next(0, 10);
+            leadership = rnd.Next(0, 10);
+            prisoner_management = rnd.Next(0, 10);
+            persuasion = rnd.Next(0, 10);
+            engineer = rnd.Next(0, 10);
+            first_aid = rnd.Next(0, 10);
+            surgery = rnd.Next(0, 10);
+            wound_treatment = rnd.Next(0, 10);
+            inventory_management = rnd.Next(0, 10);
+            spotting = rnd.Next(0, 10);
+            path_finding = rnd.Next(0, 10);
+            tactics = rnd.Next(0, 10);
+            tracking = rnd.Next(0, 10);
+            trainer = rnd.Next(0, 10);
+            looting = rnd.Next(0, 10);
+            horse_archery = rnd.Next(0, 10);
+            riding = rnd.Next(0, 10);
+            athletics = rnd.Next(0, 10);
+            shield = rnd.Next(0, 10);
+            weapon_master = rnd.Next(0, 10);
+            power_draw = rnd.Next(0, 10);
+            power_throw = rnd.Next(0, 10);
+            power_strike = rnd.Next(0, 10);
+            ironflesh = rnd.Next(0, 10);
 
-            trade = 0;
-            leadership = 0;
-            prisoner_management = 0;
-            persuasion = 0;
-            engineer = 0;
-            first_aid = 0;
-            surgery = 0;
-            wound_treatment = 0;
-            inventory_management = 0;
-            spotting = 0;
-            path_finding = 0;
-            tactics = 0;
-            tracking = 0;
-            trainer = 0;
-            looting = 0;
-            horse_archery = 0;
-            riding = 3;
-            athletics = 3;
-            shield = 0;
-            weapon_master = 1;
-            power_draw = 0;
-            power_throw = 2;
-            power_strike = 2;
-            ironflesh = 2;
-
-            one_handed_weapons = 90;
-            two_handed_weapons = 60;
-            polearms = 60;
-            archery = 60;
-            crossbows = 60;
-            throwing = 60;
+            one_handed_weapons = rnd.Next(10, 100);
+            two_handed_weapons = rnd.Next(10, 100);
+            polearms = rnd.Next(10, 100);
+            archery = rnd.Next(10, 100);
+            crossbows = rnd.Next(10, 100);
+            throwing = rnd.Next(10, 100);
         }
         public Character(Character c)
         {
